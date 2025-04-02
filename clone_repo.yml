@@ -1,0 +1,11 @@
+---
+- name: Ansible playbook to clone repo and test ansible vault
+  hosts: all
+  become: true
+  vars_files:
+   - vault-pass.yml
+  tasks:
+  - name: clone a repo
+    git:
+      repo: https://agoyal31:{{ password }}@github.com/agoyal31/Ansible.git
+      dest: /opt/AnsibleRepo

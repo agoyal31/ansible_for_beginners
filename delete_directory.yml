@@ -1,0 +1,11 @@
+---
+- name: this playbook is used to delete directory
+  hosts: all
+  tasks:
+  - name: Delete existing directory/file
+    file:
+      path: "{{ item }}"
+      state: absent
+    loop:
+    - /home/ansadmin/directory1
+    - /home/ansadmin/index.html

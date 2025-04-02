@@ -1,0 +1,9 @@
+---
+- name: this playbook is used to install multiple packages through single task execution
+  hosts: all
+  become: true
+  tasks:
+  - name: install packages
+    yum:
+      name: ['git', 'make', 'gcc', 'wget', 'telnet', 'gzip']
+      state: installed

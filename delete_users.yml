@@ -1,0 +1,14 @@
+---
+- name: this playbook is used to delete the users
+  hosts: all
+  become: true
+  tasks:
+  - name: remove users
+    user:
+      name: "{{ item }}"
+      state: absent
+      remove: yes
+    loop:
+    - john
+    - mogli
+    - tomAndJerry

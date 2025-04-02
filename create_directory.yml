@@ -1,0 +1,11 @@
+---
+- name: this playbook is used to create directory
+  hosts: all
+  # to remove gather facts
+  # gather_facts: no
+  # need to remove gather facts when not needed because lets assume we have 100 managed nodes so while running the ansible playbook on these 100 nodes sometimes its unnecessary to collect information of 100+ target systems and it will take longer to execute ansible playbook. So, if managed nodes information is not required we should set gather_facts to no while writing ansible playbook. 
+  tasks:
+  - name: creat a new directory
+    file:
+      path: /home/ansadmin/directory1
+      state: directory

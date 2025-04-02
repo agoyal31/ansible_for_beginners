@@ -1,0 +1,17 @@
+---
+- name: this playbook is to create a user
+  hosts: all
+  become: true
+  # use variables from existing file
+  vars_files:
+    - user.yml
+  # to declare variables
+  #vars:
+    #user is a variable
+    #everytime new user - ansible playbook needs to be updated(by passing new value to user variable)
+    #user: mogli
+  tasks:
+  - name: creating user {{ user }}  
+    user: 
+      #key-value key(name) value(user)
+      name: "{{ user }}"

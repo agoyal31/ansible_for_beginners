@@ -1,0 +1,30 @@
+---
+- name: this playbook is used to install httpd/apache2 and run httpd/apache2 on group of servers/target system/managed node based on there os_family
+  hosts: all
+  become: true
+  tasks:
+  - name: install httpd
+    yum:
+      name: httpd
+      state: installed
+    when: ansible_os_family == "RedHat"
+  - name: startt httpd service
+    service:
+      name: httpd
+      state: started
+    when: ansible_os_family == "RedHat"
+  - name: install apache2
+    apt:
+      name: apache2
+      state: present
+    when: ansible_os_family == "Debian"
+  - name: start apache2 service
+    service:
+      name: apache2
+      state: started
+    when: ansible_os_family == "Debian"
+  - name: copy index.html file to all managed nodes
+    copy:
+      src: /opt/ansible/index.html
+      dest: /var/www/html
+      mode: 0666      

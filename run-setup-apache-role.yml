@@ -1,0 +1,6 @@
+---
+- name: this playbook is going to install httpd, copy file and start service on port 8082
+  hosts: all
+  become: true
+  roles:
+    - setup-apache

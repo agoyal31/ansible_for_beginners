@@ -1,0 +1,35 @@
+---
+- name: teardown tomcat
+  hosts: all
+  become: true
+  tasks:
+
+  - name: stop tomcat process (if running)
+    shell: |
+      ps aux | grep '[t]omcat' | awk '{print $2}' | xargs -r kill
+    ignore_errors: yes
+
+  - name: remove tomcat folder
+    file:
+      path: /opt/apache-tomcat-9.0.102
+      state: absent
+    ignore_errors: yes
+
+  - name: remove tomcat archive
+    file:
+      path: /opt/apache-tomcat-9.0.102.tar.gz
+      state: absent
+    ignore_errors: yes
+
+  - name: remove Java (on RedHat/Amazon Linux)
+    yum:
+      name: java
+      state: removed
+    when: ansible_os_family == "RedHat"
+
+  - name: remove default-jdk (on Ubuntu/Debian)
+    apt:
+      name: default-jdk
+      state: absent
+    when: ansible_os_family == "Debian"
+
